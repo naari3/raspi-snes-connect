@@ -9,6 +9,8 @@ const int P_S = 20;
 const int CLK = 21;
 const int _DAT = 22;
 
+const int sleep_time = 0;
+
 int main() {
   int r = 0;
   if (wiringPiSetupGpio() < 0) {
@@ -27,18 +29,24 @@ int main() {
   while (true) {
     for (int i = 0; i < 16; i++) {
       digitalWrite(CLK, HIGH);
+      delay(sleep_time);
       digitalWrite(CLK, LOW);
+      delay(sleep_time);
       if (i == 0) {
         digitalWrite(P_S, HIGH);
+        delay(sleep_time);
         digitalWrite(P_S, LOW);
+        delay(sleep_time);
       }
       stack[i] = digitalRead(_DAT);
     }
-    for (int j = 0; j < 16; j++) {
-      cout << (stack[j] == 0 ? "P" : " ") << " ";
-    }
-    cout << "\r";
-    memcpy(prev_stack, stack, sizeof(stack));
+    // if (memcmp(stack, prev_stack, sizeof(prev_stack)) != 0) {
+      for (int j = 0; j < 16; j++) {
+        cout << (stack[j] == 0 ? "P" : " ") << " ";
+      }
+      cout << "\r";
+      memcpy(prev_stack, stack, sizeof(stack));
+    // }
   }
 
   return 0;
