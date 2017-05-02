@@ -25,7 +25,7 @@ int main() {
   int stack[16];
   int prev_stack[16];
 
-  cout << "B Y s S U D L R A X L R 1 2 3 4" << endl;
+  cout << "B Y s S u d l r A X L R 1 2 3 4" << endl;
   while (true) {
     for (int i = 0; i < 16; i++) {
       digitalWrite(CLK, HIGH);
@@ -45,8 +45,8 @@ int main() {
         cout << (stack[j] == 0 ? "P" : " ") << " ";
       }
       cout << "\r";
-      memcpy(prev_stack, stack, sizeof(stack));
     // }
+    memcpy(prev_stack, stack, sizeof(stack));
   }
 
   return 0;
