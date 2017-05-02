@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <cstring>
 #include <wiringPi.h>
 using namespace std;
 
@@ -9,7 +10,7 @@ const int _DAT = 22;
 
 int main() {
   if (wiringPiSetupGpio() < 0) {
-    printf("GPIO ERROR\n");
+    cout << "GPIO ERROR" << endl;
     return 0;
   }
 
