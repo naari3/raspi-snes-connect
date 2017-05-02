@@ -2,13 +2,17 @@
 #include <algorithm>
 #include <cstring>
 #include <wiringPi.h>
+
 using namespace std;
 
 const int P_S = 20;
 const int CLK = 21;
 const int _DAT = 22;
 
+const int sleep_time = 1
+
 int main() {
+  int r = 0;
   if (wiringPiSetupGpio() < 0) {
     cout << "GPIO ERROR" << endl;
     return 0;
@@ -25,12 +29,18 @@ int main() {
     for (int i = 0; i < 16; i++) {
       if (i == 0) {
         digitalWrite(P_S, HIGH);
+        delay(sleep_time);
         digitalWrite(P_S, LOW);
+        delay(sleep_time);
       }
       digitalWrite(CLK, HIGH);
+      delay(sleep_time);
       digitalWrite(CLK, LOW);
-      stack[i] = digitalRead(_DAT);
+      delay(sleep_time);
+      r = digitalRead(_DAT);
+      stack[i] = r;
     }
+    cout << memcmp(stack, prev_stack, 16) << endl;
     if (memcmp(stack, prev_stack, 16) != 0) {
       for (int j = 0; j < 16; j++) {
         cout << stack[j] << " ";
