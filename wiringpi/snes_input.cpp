@@ -9,7 +9,7 @@ const int P_S = 20;
 const int CLK = 21;
 const int _DAT = 22;
 
-const int sleep_time = 1
+const int sleep_time = 1;
 
 int main() {
   int r = 0;
