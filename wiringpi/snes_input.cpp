@@ -9,7 +9,7 @@ const int P_S = 20;
 const int CLK = 21;
 const int _DAT = 22;
 
-const int sleep_time = 1;
+const int sleep_time = 2;
 
 int main() {
   int r = 0;
@@ -24,30 +24,29 @@ int main() {
 
   int stack[16];
   int prev_stack[16];
+
   cout << "B Y s S U D L R A X L R 1 2 3 4" << endl;
   while (true) {
     for (int i = 0; i < 16; i++) {
+      digitalWrite(CLK, HIGH);
+      delay(sleep_time);
+      digitalWrite(CLK, LOW);
+      delay(sleep_time);
       if (i == 0) {
         digitalWrite(P_S, HIGH);
         delay(sleep_time);
         digitalWrite(P_S, LOW);
         delay(sleep_time);
       }
-      digitalWrite(CLK, HIGH);
-      delay(sleep_time);
-      digitalWrite(CLK, LOW);
-      delay(sleep_time);
-      r = digitalRead(_DAT);
-      stack[i] = r;
+      stack[i] = digitalRead(_DAT);
     }
-    cout << memcmp(stack, prev_stack, 16) << endl;
-    if (memcmp(stack, prev_stack, 16) != 0) {
+    if (memcmp(stack, prev_stack, sizeof(prev_stack)) != 0) {
       for (int j = 0; j < 16; j++) {
-        cout << stack[j] << " ";
+        cout << (stack[j] == 1 ? "P" : " ") << " ";
       }
       cout << "\r";
+      memcpy(prev_stack, stack, sizeof(stack));
     }
-    memcpy(prev_stack, stack, 16);
   }
 
   return 0;
