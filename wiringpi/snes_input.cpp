@@ -1,11 +1,11 @@
 #include <iostream>
 #include <algorithm>
-#include <wiringPi/wiringPi.h>
+#include <wiringPi.h>
 using namespace std;
 
-const int P_S = 20
-const int CLK = 21
-const int _DAT = 22
+const int P_S = 20;
+const int CLK = 21;
+const int _DAT = 22;
 
 int main() {
   if (wiringPiSetupGpio() < 0) {
