@@ -29,14 +29,14 @@ int main() {
   while (true) {
     for (int i = 0; i < 16; i++) {
       digitalWrite(CLK, HIGH);
-      delay(sleep_time);
+      delayMicroseconds(sleep_time);
       digitalWrite(CLK, LOW);
-      delay(sleep_time);
+      delayMicroseconds(sleep_time);
       if (i == 0) {
         digitalWrite(P_S, HIGH);
-        delay(sleep_time);
+        delayMicroseconds(sleep_time);
         digitalWrite(P_S, LOW);
-        delay(sleep_time);
+        delayMicroseconds(sleep_time);
       }
       stack[i] = digitalRead(_DAT);
     }
